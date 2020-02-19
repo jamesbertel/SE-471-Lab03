@@ -12,14 +12,15 @@ public class SortingUtility {//implements SortingUtility_IF {
     List<Product> items = ogList;
     
     for(int i = 0; i < items.size()-1; i++)
+    {
       for(int j = 0; j < items.size()-i-1; j++)
         if(items.get(j+1).getID() < items.get(j).getID())
         {
-          //swap items[j+1] and items[i]
           Product temp = items.get(j);
           items.set(j, items.get(j+1));
           items.set(j+1, temp);
-        }   
+        }
+    }
     return items;
   }//end bubblesort() id, then name and price
   
