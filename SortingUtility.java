@@ -7,6 +7,7 @@ import java.util.List;
 
 public class SortingUtility {
   
+  
   private List<Product> bubbleSort(List<Product> ogList) {
     
     List<Product> items = ogList;
@@ -21,7 +22,7 @@ public class SortingUtility {
           items.set(j+1, temp);
         }   
     return items;
-  }//end bubblesort()
+  }//end bubblesort() id, then name and price
   
   private List<Product> quickSort(List<Product> ogList, int low, int high) {
     
@@ -47,7 +48,7 @@ public class SortingUtility {
     items.set(high, temp);
     
     return items;
-  }//end quickSort()
+  }//end quickSort(), by name, then id and price
   
   public List<Product> sort(List<Product> items, int sortingApproach){
    
@@ -68,6 +69,4 @@ public class SortingUtility {
     return temp;
   }//end sort()
 
-  
-  
 }

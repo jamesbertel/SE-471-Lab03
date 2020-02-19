@@ -13,16 +13,35 @@ import java.util.List;
  */
 public class SortingUtilityProxy {
   
-  public void print(List<Product> items){
+  public void print(List<Product> items, int sortingApproach){
     
-    System.out.println("Name\t\tPrice");
+    System.out.println("ID\t\tName\t\tPrice");
     System.out.println("---------------------------------------------");
     
-    for(int i = 0; i < items.size(); i++)
-    {
-      System.out.print(items.get(i).getName()+"\t");
-      System.out.println(items.get(i).getPrice());
+    switch (sortingApproach) {
+      case 1: //sorted by bubbleSort(), in order by ID
+        for(int i = 0; i < items.size(); i++)
+        {
+          System.out.print(items.get(i).getID()+"\t\t");
+          System.out.print(items.get(i).getName()+"\t\t");
+          System.out.println(items.get(i).getPrice());
+        }
+        break;
+      case 2: //quickSort, in order by price (soon to be by name)
+        for(int i = 0; i < items.size(); i++)
+        {
+          System.out.print(items.get(i).getName()+"\t\t");
+          System.out.print(items.get(i).getID()+"\t\t");
+          System.out.println(items.get(i).getPrice());
+        }
+        break;
+      default:
+        System.out.println("ERROR: bad sortingApproach");
+        break;
     }
+    
+    System.out.println();
+    
   }
   
   private List<Product> bubbleSort(List<Product> ogList) {
@@ -31,6 +50,7 @@ public class SortingUtilityProxy {
     
     for(int i = 0; i < items.size()-1; i++)
       for(int j = 0; j < items.size()-i-1; j++)
+        //if(items.get(j+1).getName().compareTo(items.get(j).getName))
         if(items.get(j+1).getID() < items.get(j).getID())
         {
           //swap items[j+1] and items[i]
@@ -44,7 +64,7 @@ public class SortingUtilityProxy {
   
   private List<Product> quickSort(List<Product> ogList, int low, int high) {
     List<Product> items = ogList;
-    
+        
     Product turnpoint = items.get(high);
     int i = low-1; //index of smaller element
     
@@ -58,8 +78,14 @@ public class SortingUtilityProxy {
         items.set(i, items.get(j));
         items.set(j, temp);
       }
-    }   
+    }
+    
+    Product temp = items.get(i+1);
+    items.set(i+1, items.get(high));
+    items.set(high, temp);
+    
     return items;
+
   }
   
   public List<Product> sort(List<Product> items, int sortingApproach){

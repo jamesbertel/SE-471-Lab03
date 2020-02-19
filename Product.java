@@ -5,12 +5,18 @@ package lab03;
 
 public class Product {
   
-  private static long ID;
+  private final long ID;
   private String name;
   private double price;
   
-  public static long getID() {return ID;}
-  public static void setID(long aID) {ID = aID;}
+  public Product(long pID, String pName, double pPrice){
+    this.ID = pID;
+    this.name = pName;
+    this.price = pPrice;
+  }
+  
+  public final long getID() {return ID;}
+  //public final void setID(long aID) {ID = aID;}
   public String getName() {return name;}
   public void setName(String name) {this.name = name;}
   public double getPrice() {return price;}
