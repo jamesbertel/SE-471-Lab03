@@ -1,11 +1,10 @@
-/*
- * 
- */
 package lab03;
 
 import java.util.List;
 
-public class SortingUtility {
+public class SortingUtility {//implements SortingUtility_IF {
+  
+  private List<Product> listOfProducts;
   
   
   private List<Product> bubbleSort(List<Product> ogList) {
@@ -24,28 +23,21 @@ public class SortingUtility {
     return items;
   }//end bubblesort() id, then name and price
   
+  
   private List<Product> quickSort(List<Product> ogList, int low, int high) {
     
     List<Product> items = ogList;
     
     Product turnpoint = items.get(high);
-    int i = low-1; //index of smaller element
     
-    for(int j = low; j < high; j++){
-      //if current elem is smaller than turnpoint
-      if(items.get(j).getPrice() < turnpoint.getPrice())
-      {
-        i++;
-        //swap items[i] and items[j]
-        Product temp = items.get(i);
-        items.set(i, items.get(j));
-        items.set(j, temp);
+    for(int i = 0; i < high; i++)
+      for(int j = i+1; j < high+1; j++){
+        if(0 < items.get(i).getName().compareTo(items.get(j).getName())){  
+          Product temp = items.get(i);
+          items.set(i, items.get(j));
+          items.set(j, temp);
+        }
       }
-    }
-    
-    Product temp = items.get(i+1);
-    items.set(i+1, items.get(high));
-    items.set(high, temp);
     
     return items;
   }//end quickSort(), by name, then id and price

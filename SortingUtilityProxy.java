@@ -11,15 +11,17 @@ import java.util.List;
  *
  * @author James
  */
-public class SortingUtilityProxy {
+public class SortingUtilityProxy implements SortingUtility_IF {
   
+  private SortingUtility sortUtil;
+  
+  @Override
   public void print(List<Product> items, int sortingApproach){
     
-    System.out.println("ID\t\tName\t\tPrice");
-    System.out.println("---------------------------------------------");
-    
     switch (sortingApproach) {
-      case 1: //sorted by bubbleSort(), in order by ID
+      case 1:
+        System.out.println("ID\t\tName\t\tPrice");
+        System.out.println("---------------------------------------------");
         for(int i = 0; i < items.size(); i++)
         {
           System.out.print(items.get(i).getID()+"\t\t");
@@ -27,7 +29,9 @@ public class SortingUtilityProxy {
           System.out.println(items.get(i).getPrice());
         }
         break;
-      case 2: //quickSort, in order by price (soon to be by name)
+      case 2:
+        System.out.println("Name\t\tID\t\tPrice");
+        System.out.println("---------------------------------------------");
         for(int i = 0; i < items.size(); i++)
         {
           System.out.print(items.get(i).getName()+"\t\t");
@@ -42,10 +46,10 @@ public class SortingUtilityProxy {
     
     System.out.println();
     
-  }
+  }//end print()
+  
   
   private List<Product> bubbleSort(List<Product> ogList) {
-    
     List<Product> items = ogList;
     
     for(int i = 0; i < items.size()-1; i++)
@@ -60,33 +64,25 @@ public class SortingUtilityProxy {
         }
     
     return items;
-  }
+  }//end bubbleSort()
   
-  private List<Product> quickSort(List<Product> ogList, int low, int high) {
+  
+  private List<Product> quickSort(List<Product> ogList, int low, int high) {//0, 4
     List<Product> items = ogList;
-        
+    
     Product turnpoint = items.get(high);
-    int i = low-1; //index of smaller element
     
-    for(int j = low; j < high; j++){
-      //if current elem is smaller than turnpoint
-      if(items.get(j).getPrice() < turnpoint.getPrice())
-      {
-        i++;
-        //swap items[i] and items[j]
-        Product temp = items.get(i);
-        items.set(i, items.get(j));
-        items.set(j, temp);
+    for(int i = 0; i < high; i++)
+      for(int j = i+1; j < high+1; j++){
+        if(0 < items.get(i).getName().compareTo(items.get(j).getName())){  
+          Product temp = items.get(i);
+          items.set(i, items.get(j));
+          items.set(j, temp);
+        }
       }
-    }
-    
-    Product temp = items.get(i+1);
-    items.set(i+1, items.get(high));
-    items.set(high, temp);
     
     return items;
-
-  }
+  }//end quickSort()
   
   public List<Product> sort(List<Product> items, int sortingApproach){
    
